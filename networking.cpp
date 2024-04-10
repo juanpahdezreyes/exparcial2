@@ -223,18 +223,40 @@ RedSocial_::RedSocial_(string nombre, vector<Usuario_*> usuarios, vector<Publica
 }
 
 int main() {
-    Usuario_ usuario1(1, "Elon Musk", 52);
+    Usuario_ usuario1(1, "Llados", 32); //usuario1 es un objeto de la clase Usuario, que representan los usuarios de la red social,
+                                          // se crean utilizando el constructor de usuarios para llenar toda la informacion del usuario 
+                                          //como su id, nombre etc.
+
     Usuario_ usuario2(2, "Mark Zuckemberg", 38);
     Usuario_ usuario3(3, "Warren Buffet", 73, "Canadiense");
-    Publicacion_ post1(1, &usuario1, "09/abr/2024", "Hola emprendedores, tengo un nuevo puesto para SEO de Tesla, ¿Quien se une?");
+
+    //post1 es un objeto de la clase Publicacion, que representan las publicaciones de los usuarios en la red social, y a este se le da 
+    //el puntero hacia el id del usuario que realizo la publicacion y la fecha y el contenido de la publicacion.
+
+
+    Publicacion_ post1(1, &usuario1, "09/abr/2024", "Maquinas estoy en el porfirios, volteo a la derecha panza volteo a la izquierda mileurista, aqui no puedo estar, eso esta claro.");
     Publicacion_ post2(2, &usuario2, "9/abr/2024", "Ahora invierte en Meta y te estare triplicando tu dinero, ven las oficinas y estaré explicandote");
     Publicacion_ post3(3, &usuario3, "9/abr/2024", "Este año habrá una crisis económica, unanse a la conferencia que daré mañana a las 6 pm");
+    
+    //al usuario 1 se le agrega el post1
+    //usuario 2 post2
+    //usuario 3 post3
+
     usuario1.agregarPublicacion(&post1);
     usuario2.agregarPublicacion(&post2);
     usuario3.agregarPublicacion(&post3);
 
+//hacemos vector llamado usuarios que apuntan a los apuntadores de los usuarioa
+//hacemos vector llamado publicaciones que apunta a los apuntadores de las publicaciones 
+
+//basicamente de esta manera tenemos todos los apuntadores de los usuarios en un vector 
+
+//y tambien tenemos todos los apuntadores de las publicaciones en un vector 
+
     vector<Usuario_*> usuarios;
     vector<Publicacion_*> publicaciones;
+
+//y pues ya aqui le pasamos los apuntadores del usuario o publicaciones a vector 
 
     usuarios.push_back(&usuario1);
     usuarios.push_back(&usuario2);
@@ -244,16 +266,19 @@ int main() {
     publicaciones.push_back(&post2);
     publicaciones.push_back(&post3);
 
+   
+
+
     RedSocial_ pruebaRed("NetWorking", usuarios, publicaciones);
     int option, numeroUsuarios = 4, numerosPublicaciones = 4;
     do {
         option = 0;
         cout << ".menu" << endl << endl;
-        cout << "0. Salir" << endl;
-        cout << "1. Lista de usuarios" << endl;
-        cout << "2. Lista de publicaciones" << endl;
-        cout << "3. Explorar usuario" << endl;
-        cout << "4. Agregar usuario" << endl << endl << "--> ";
+        cout << "0- Salir" << endl;
+        cout << "1- Lista de empresarios" << endl;
+        cout << "2- Lista de oportunidades potenciales" << endl;
+        cout << "3- investigar empresario" << endl;
+        cout << "4- Agregar empresario" << endl;
         cin >> option;
         switch (option) {
             case 0: {
@@ -289,7 +314,7 @@ int main() {
                             cout << "nacionalidad: " << pruebaRed.getUsuario(idUsuario)->nacionalidad_ << endl;
                             cout << endl << endl;
                         }
-                        cout << "0. Salir" << endl << "1. Ver info de usuario " << endl << "2. Ver a mis amigos" << endl << "3. Ver publicaciones" << endl << "4. Crear publicacion" << endl << "5. ver amigo" << endl << "6. Agregar nuevo amigo" << endl;
+                        cout << "0- Salir" << endl << "1- Ver info del empresario " << endl << "2- Ver a mis contactos empresarios" << endl << "3- Ver publicaciones de empresarios" << endl << "4- Crear publicacion empresarial" << endl << "5. ver empresario" << endl << "6. Agregar nuevo empresario" << endl;
                         cin >> elMenu;
                         if (elMenu == 1) {
                              cout << "Información del usuario: " << endl;
@@ -304,7 +329,7 @@ int main() {
                             cout << endl;
                         }
                         if (elMenu == 3) {
-                            cout << ".publicaciones del usuario" << endl;
+                            cout << ".publicaciones del empresario" << endl;
                             pruebaRed.getUsuario(idUsuario)->mostrarPublicaciones();
                             cout << endl;
                             goto Elmenu;
@@ -315,7 +340,7 @@ int main() {
                             goto exploreAmigo;
                         }
                         if (elMenu == 5) {
-                            cout << "Ingresa el id para encontrar a alguien" << endl << endl << "--> ";
+                            cout << "Ingresa el id para encontrar al empresario" << endl << endl << "--> ";
                             cin >> idUsuarioAmigo;
                             for (int i = 0; i < pruebaRed.getUsuario(idUsuario)->amigos_.size(); i++) {
                                 if (idUsuarioAmigo == pruebaRed.getUsuario(idUsuario)->amigos_[i]->getId2()) {
@@ -325,7 +350,7 @@ int main() {
                             if (forAmigo) {
                                 goto exploreAmigo;
                             } else {
-                                cout << "Aun no lo agregas a tus amigos" << endl;
+                                cout << "Aun no lo agregas a tus networking de empresario" << endl;
                             }
                         }
                         if (elMenu == 6) {
@@ -340,20 +365,22 @@ int main() {
                         }
                     }
                 } else {
-                    cout << "No existe nadie" << endl;
+                    cout << "No esta dado de alta en Networking ese empresario" << endl;
                 }
                 break;
             }
             case 4: {
                 string name, nationality;
                 int age;
-                cout << "Ingresa el nombre" << endl;
+                cout << "Ingresa el nombre del empresario" << endl;
                 cin >> name;
-                cout << "Ingresa la edad" << endl;
+                cout << "Ingresa la edad del empresario" << endl;
                 cin >> age;
-                cout << "Ingrese la nacionalidad" << endl;
+                cout << "Ingrese la nacionalidad del empresario" << endl;
                 cin >> nationality;
-                Usuario_ newusuario(numeroUsuarios, name, age, nationality);
+                Usuario_ newusuario(numeroUsuarios, name, age, nationality); 
+        /*numerodeUsuarios esta definido arriba en 4 debido a los 3 usuarios default aqui se añade como el id y 
+        luego se incrementa para la siguiente vez que creas un usuario*/
                 numeroUsuarios++;
                 pruebaRed.agregarUsuario(&newusuario);
                 break;
@@ -364,7 +391,6 @@ int main() {
             }
         }
     } while (option != 0);
-
-    cout << "Cerrado Correctamente";
+    
     return 0;
 }
