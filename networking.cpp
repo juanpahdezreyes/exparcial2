@@ -1,8 +1,6 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include <time.h>
-#include <stdlib.h>
 
 using namespace std;
 
@@ -269,8 +267,14 @@ int main() {
    
 
 
-    RedSocial_ pruebaRed("NetWorking", usuarios, publicaciones);
-    int option, numeroUsuarios = 4, numerosPublicaciones = 4;
+    RedSocial_ pruebaRed("NetWorking", usuarios, publicaciones); // objeto de la clase RedSocial el cual se llama pruebaRed al 
+                                                                 //cual se le da la infrmacion del nombre de la red y los vectores de 
+                                                                 //los apuntadores de usuarios y publicaciones.
+
+    int option, numeroUsuarios = 4, numerosPublicaciones = 4; //inicializa la variable option que es de tipo entero que guarda la
+                                                              //opcion del usuario en el menu
+                                                              //inicializa numeroUsuario y numerosPublicaciones que tambien son variables de tipo entero y lo que guardadn es el valor de los usuarios y las publicaciones porsi se agrega algunos o algunas nuevas, las mande al lugar que les corresponden.
+
     do {
         option = 0;
         cout << ".menu" << endl << endl;
@@ -297,7 +301,7 @@ int main() {
                 bool forAmigo;
                 Usuario_* usuarioExplorado;
                 Usuario_* usuarioExploradoNewAmigo;
-                cout << "Ingresa un id para encontrar a alguien" << endl;
+                cout << "Ingresa un id para encontrar a empresario" << endl;
                 cin >> idUsuario;
             exploreAmigo:
                 forAmigo = false;
@@ -340,7 +344,7 @@ int main() {
                             goto exploreAmigo;
                         }
                         if (elMenu == 5) {
-                            cout << "Ingresa el id para encontrar al empresario" << endl << endl << "--> ";
+                            cout << "Ingresa el id para encontrar al empresario" << endl;
                             cin >> idUsuarioAmigo;
                             for (int i = 0; i < pruebaRed.getUsuario(idUsuario)->amigos_.size(); i++) {
                                 if (idUsuarioAmigo == pruebaRed.getUsuario(idUsuario)->amigos_[i]->getId2()) {
@@ -386,7 +390,7 @@ int main() {
                 break;
             }
             default: {
-                cout << "Inserte una opcion valida" << endl << endl;
+                cout << "opcion invalida" << endl << endl;
                 break;
             }
         }
